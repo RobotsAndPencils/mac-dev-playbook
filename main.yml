@@ -20,6 +20,8 @@
     - role: geerlingguy.mas
       when: mas_installed_apps
       tags: ['mas']
+    - role: TupleAustin.rbenv-homebrew
+      tags: ['rbenv']
 
   tasks:
     - include_tasks: tasks/ansible-setup.yml
