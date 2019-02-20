@@ -56,10 +56,10 @@ homebrew_installed_packages:
 
 homebrew_taps:
   - homebrew/core
-#  - homebrew/cask
+  - homebrew/cask
 
-# homebrew_cask_appdir: /Applications
-# homebrew_cask_apps:
+homebrew_cask_appdir: /Applications
+homebrew_cask_apps: []
 #  - chromedriver
 #  - docker
 #  - dropbox
