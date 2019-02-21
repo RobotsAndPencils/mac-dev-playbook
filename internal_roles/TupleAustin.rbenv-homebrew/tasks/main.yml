@@ -1,0 +1,49 @@
+---
+
+- name: Install rbenv
+  homebrew: name=rbenv state=latest
+
+- name: Install ruby-build
+  homebrew: name=ruby-build state=latest
+
+- name: Install Ruby ({{ homebrew_rbenv.ruby_version }})
+  shell: >
+    eval "$(rbenv init -)";
+    rbenv install {{ homebrew_rbenv.ruby_version }}
+    creates=~/.rbenv/versions/{{ homebrew_rbenv.ruby_version }}
+  environment:
+  #  PATH: $PATH:{{ homebrew_brew_bin_path }}
+  
+- name: Configure globally
+  shell: >
+    eval "$(rbenv init -)";
+    rbenv global
+  register: rbenv_global_version
+  changed_when: false
+
+- name: Create profile
+  file:
+    path: ~/.profile
+    state: touch
+
+- name: Update profile
+  lineinfile:
+    dest: ~/.profile
+    state: present
+    line: 'eval "$(rbenv init -)"'
+
+- name: Confirm {{ homebrew_rbenv.ruby_version }}
+  shell: >
+    eval "$(rbenv init -)";
+    rbenv global {{ homebrew_rbenv.ruby_version }}
+  when: rbenv_global_version.stdout != homebrew_rbenv.ruby_version
+
+# NOTE: We must set user_install=no to install gems to ~/.rbenv/versions/{{ rbenv_ruby_version }}/lib/ruby/gems/.
+# If not, gems are installed to /usr/local/lib/ruby/gems/.
+- gem: name={{ item }} state=latest user_install=no executable=~/.rbenv/shims/gem
+  notify: rbenv rehash
+  with_items: "{{ homebrew_rbenv.global_gems }}"
+
+
+# - name: Install Bundler
+#  gem: name=bundler state=latest user_install=no executable=~/.rbenv/shims/gem

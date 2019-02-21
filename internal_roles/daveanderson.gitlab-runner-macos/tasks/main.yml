@@ -1,0 +1,38 @@
+---
+# tasks file for daveanderson.gitlab-runner-macos
+
+- name: Printing all the environment​ variables in Ansible
+  debug:
+    msg: "{{ ansible_env }}"
+
+- name: Check if runner plist is installed
+  stat: 
+    path: ~/Library/LaunchAgents/gitlab-runner.plist
+  register: runner_plist
+
+- name: Stop runner
+  command: gitlab-runner stop
+  when: runner_plist.stat.exists == true
+
+- name: Download runner
+  get_url:
+    url: https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-darwin-amd64
+    dest: /usr/local/bin/gitlab-runner
+    mode: 0755
+  become: yes
+
+- name: Install runner
+  command: gitlab-runner install
+  when: runner_plist.stat.exists == false
+
+- name: Modify runner LaunchAgent plist
+  replace:
+    path: ~/Library/LaunchAgents/gitlab-runner.plist
+    regexp: '/mac-dev-playbook'
+    replace: '/gitlab-runner'
+  when: runner_plist.stat.exists == false
+
+- name: Start runner
+  command: gitlab-runner start
+
+

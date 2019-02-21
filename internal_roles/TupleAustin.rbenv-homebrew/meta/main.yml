@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Colin Drake
+  company: Tuple Labs, LLC
+  description: An ansible role to install rbenv, Ruby, and Bundler via Homebrew
+  license: MIT
+  min_ansible_version: 2.1
+  platforms:
+  - name: Darwin
+    versions:
+    - all
+  galaxy_tags:
+  - development
+  - ruby
+  dependencies:
+  - geerlingguy.homebrew

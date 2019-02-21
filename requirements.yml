@@ -3,3 +3,4 @@
 - name: geerlingguy.homebrew
 - name: geerlingguy.mas
 - name: TupleAustin.rbenv-homebrew
+- nane: daveanderson.gitlab-runner-macos

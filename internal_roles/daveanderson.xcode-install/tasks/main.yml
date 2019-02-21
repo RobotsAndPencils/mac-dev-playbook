@@ -1,0 +1,31 @@
+---
+# tasks file for daveanderson.xcode
+
+- name: Printing all the environment​ variables in Ansible
+  debug:
+    msg: "{{ ansible_env }}"
+
+- name: Get versions of Xcode available
+  shell: >
+    xcversion update
+
+- name: List versions of Xcode available (not printing yet)
+  shell: >
+    xcversion list
+  register: hello
+
+- debug: msg="{{ hello.stdout }}"
+
+- debug: msg="{{ hello.stderr }}"
+
+- name: Install Xcode
+  shell: >
+    xcversion install {{ xcode_install.xcode_version }}
+  become: yes
+  become_method: sudo
+  register: something
+
+- debug: msg="{{ something.stdout }}"
+
+- debug: msg="{{ something.stderr }}"
+

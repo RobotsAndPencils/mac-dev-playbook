@@ -1,0 +1,5 @@
+---
+# defaults file for daveanderson.gitlab-runner-macos
+gitlab_runner_macos:
+  working_directory: ~/Documents/gitlab-runner
+

@@ -12,6 +12,13 @@ homebrew_rbenv:
   - bundler
   - xcode-install
 
+## This isn't working because xcversion doesn't like to run in a non-interactive shell
+## Plus with 2FA, automating things like this is going to get increasingly difficult
+#xcode_install:
+#  xcode_version: 10.1
+
+gitlab_runner_macos: yes
+
 #dotfiles_repo: https://github.com/geerlingguy/dotfiles.git
 #dotfiles_repo_accept_hostkey: yes
 #dotfiles_repo_local_destination: ~/Dropbox/Development/GitHub/dotfiles

@@ -22,6 +22,8 @@
       tags: ['mas']
     - role: TupleAustin.rbenv-homebrew
       tags: ['rbenv']
+    - role: daveanderson.gitlab-runner-macos
+      Tags: ['gitlab']
 
   tasks:
     - include_tasks: tasks/ansible-setup.yml
