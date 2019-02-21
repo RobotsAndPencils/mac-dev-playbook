@@ -52,7 +52,7 @@ homebrew_installed_packages:
   - rbenv
   - rg
   - bat
-#  - jenkins
+  # - jenkins
 
 homebrew_taps:
   - homebrew/core
