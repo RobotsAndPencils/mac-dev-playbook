@@ -11,6 +11,7 @@ homebrew_rbenv:
  global_gems:
   - bundler
   - xcode-install
+  - fastlane
 
 ## This isn't working because xcversion doesn't like to run in a non-interactive shell
 ## Plus with 2FA, automating things like this is going to get increasingly difficult
@@ -59,7 +60,11 @@ homebrew_installed_packages:
   - rbenv
   - rg
   - bat
+  - git-lfs
+  - fd
+  - exa
   # - jenkins
+  # Note: need to `git lfs install` after brew installs git-lfs
 
 homebrew_taps:
   - homebrew/core
